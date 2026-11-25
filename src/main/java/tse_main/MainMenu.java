@@ -39,8 +39,8 @@ import table_database.TableDao;
 import table_skeleton.TableRow;
 import table_skeleton.TableVersion;
 import test_case.EnumPicker;
+import tse_alleleyearselector.AlleleYearListSelectorDialog;
 import tse_amend_report.ReportAmendDialog;
-import tse_areaselector.AreaListSelectorDialog;
 import tse_config.CustomStrings;
 import tse_config.DebugConfig;
 import tse_main.listeners.CopySelectionListener;
@@ -167,12 +167,12 @@ public class MainMenu {
 		});
 		
 		catalogueSelector = new MenuItem(main, SWT.PUSH);
-		catalogueSelector.setText(TSEMessages.get("arealist.config.item"));
+		catalogueSelector.setText(TSEMessages.get("allelelist.config.item"));
 
 		catalogueSelector.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				AreaListSelectorDialog dialog = new AreaListSelectorDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+				AlleleYearListSelectorDialog dialog = new AlleleYearListSelectorDialog(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 				try {
 					dialog.open();
 				} catch (Exception e) {

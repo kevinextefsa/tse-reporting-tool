@@ -1,4 +1,4 @@
-package tse_areaselector;
+package tse_alleleyearselector;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -27,37 +27,37 @@ import global_utils.Message;
 import global_utils.Warnings;
 import user_interface.ProxySettingsDialog;
 
-public class AreaSelectorConfig {
+public class AlleleYearSelectorConfig {
 
-	private static final Logger LOGGER = LogManager.getLogger(AreaSelectorConfig.class);
+	private static final Logger LOGGER = LogManager.getLogger(AlleleYearSelectorConfig.class);
+	private String ALLELEYEARCFG_CONFIG_PATH = "config/alleleYearConfig.xml";
 
-	private String AREACFG_CONFIG_PATH = "config/areaConfig.xml";
-	private String PARENT_AREACFG_CONFIG_PATH = ".." + System.getProperty("file.separator") 
-	+ AREACFG_CONFIG_PATH;
+	private String PARENT_ALLELECFG_CONFIG_PATH = ".." + System.getProperty("file.separator") 
+	+ ALLELEYEARCFG_CONFIG_PATH;
 	
-	private String AREARESOURCES_PATH = "areaSelectorResources/";
-	private String SAMPLISTFILE_PATH = "picklists/sampAreaLists.xml";
+	private String ALLELESOURCES_PATH = "alleleYearResources/";
+	private String SAMPLISTFILE_PATH = "picklists/alleleList.xml";
 	
-	public static final String AREA_INDEX = "Area.Index";
+	public static final String ALLELE_INDEX = "Allele.Index";
 	
 	private Shell dialogShell;
 	
-	public AreaSelectorConfig() {
+	public AlleleYearSelectorConfig() {
 		
 	}
 	
-	public AreaSelectorConfig(String basePath) {
-		this.AREACFG_CONFIG_PATH = basePath + AREACFG_CONFIG_PATH;
+	public AlleleYearSelectorConfig(String basePath) {
+		this.ALLELEYEARCFG_CONFIG_PATH = basePath + ALLELEYEARCFG_CONFIG_PATH;
 	}
 	
 	public Integer getAreaSelectorIndexInt() throws IOException {
 
 		String name;
 		try {
-			name = getValue(AREACFG_CONFIG_PATH, AREA_INDEX);
+			name = getValue(ALLELEYEARCFG_CONFIG_PATH, ALLELE_INDEX);
 		} catch (IOException e) {
-			LOGGER.error("Error in getting value for Area Selector Index: ", e);
-			name = getFromParent(AREA_INDEX);
+			LOGGER.error("Error in getting value for Allele Selector Index: ", e);
+			name = getFromParent(ALLELE_INDEX);
 		}
 		
 		try
@@ -65,7 +65,7 @@ public class AreaSelectorConfig {
 			return Integer.parseInt(name);	
 		}
 		catch (Exception e) {
-			LOGGER.error("Error in getting value for Area Selector Index: ", e);
+			LOGGER.error("Error in getting value for Allele Selector Index: ", e);
 			return 0;
 		}
 		
@@ -75,10 +75,10 @@ public class AreaSelectorConfig {
 
 		String name;
 		try {
-			name = getValue(AREACFG_CONFIG_PATH, AREA_INDEX);
+			name = getValue(ALLELEYEARCFG_CONFIG_PATH, ALLELE_INDEX);
 		} catch (IOException e) {
-			LOGGER.error("Error in getting value for Area Selector Index: ", e);
-			name = getFromParent(AREA_INDEX);
+			LOGGER.error("Error in getting value for Allele Selector Index: ", e);
+			name = getFromParent(ALLELE_INDEX);
 		}
 
 		return name;
@@ -86,28 +86,28 @@ public class AreaSelectorConfig {
 
 	public void setAreaSelectorIndex(Integer index) throws IOException {
 		String config = getPath();
-		setValue(config, AREA_INDEX, index.toString());
+		setValue(config, ALLELE_INDEX, index.toString());
 	}
 	
 	private boolean isInCurrentFolder() {
-		File file = new File(AREACFG_CONFIG_PATH);
+		File file = new File(ALLELEYEARCFG_CONFIG_PATH);
 		LOGGER.info("The configuration file is in the current folder: " + file.exists());
 		return file.exists();
 	}
 	
 	private String getPath() {
 		if (isInCurrentFolder())
-			return AREACFG_CONFIG_PATH;
+			return ALLELEYEARCFG_CONFIG_PATH;
 		else
-			return PARENT_AREACFG_CONFIG_PATH;
+			return PARENT_ALLELECFG_CONFIG_PATH;
 	}
 	
 	public String getConfigPath() {
-		return this.AREACFG_CONFIG_PATH;
+		return this.ALLELEYEARCFG_CONFIG_PATH;
 	}
 	
 	private String getFromParent(String key) throws IOException {
-		return getValue(PARENT_AREACFG_CONFIG_PATH, key);
+		return getValue(PARENT_ALLELECFG_CONFIG_PATH, key);
 	}
 	
 	
@@ -154,7 +154,7 @@ public class AreaSelectorConfig {
 	
 	private void overwriteXML(Integer selectedVersion)
 	{
-		String pathToSelected = AREARESOURCES_PATH + selectedVersion.toString() + ".xml";
+		String pathToSelected = ALLELESOURCES_PATH + selectedVersion.toString() + ".xml";
 	
 		
 		byte[] filecontents = {};

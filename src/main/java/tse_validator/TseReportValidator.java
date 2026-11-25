@@ -21,6 +21,8 @@ import table_skeleton.TableCell;
 import table_skeleton.TableColumn;
 import table_skeleton.TableRow;
 import table_skeleton.TableColumn.ColumnType;
+import tse_alleleyearselector.AlleleYearSelectorConfig;
+import tse_alleleyearselector.AlleleYearSelectorEnum;
 import tse_analytical_result.AnalyticalResult;
 import tse_case_report.CaseReport;
 import tse_config.CustomStrings;
@@ -534,7 +536,8 @@ public class TseReportValidator extends ReportValidator {
 		Collection<ReportError> errors = new ArrayList<>();
 		ErrorType errorType = ResultValidator.getError(row);
 		String rowId = getStackTrace(row);
-
+		
+		
 		switch (errorType) {
 		case ALLELE_ERROR:
 			errors.add(new AlleleNotReportableError(rowId, row.getLabel(CustomStrings.ALLELE_1_COL), row.getLabel(CustomStrings.ALLELE_2_COL)));
@@ -555,6 +558,19 @@ public class TseReportValidator extends ReportValidator {
 				errors.add(new WrongAnalysisYearError(rowId, analysisDate, reportDate));
 		} catch (NumberFormatException e) {
 			LOGGER.error("Error in parsing a non-numeric String", e);
+			e.printStackTrace();
+		}
+		// check report year coincides with allele selector year
+
+		try {
+			String yearAlleleConfig = AlleleYearSelectorEnum.fromInt(new AlleleYearSelectorConfig().getAreaSelectorIndexInt()).getLabel();
+			String yearReport = report.getYear();			
+
+			if(!yearAlleleConfig.equals(yearReport)) {
+				errors.add(new WrongAlleleYearError(rowId, yearReport, yearAlleleConfig));
+			}
+		} catch (IOException e) {
+			LOGGER.error("Error on checking report year coincides with allele year selected", e);
 			e.printStackTrace();
 		}
 		return errors;

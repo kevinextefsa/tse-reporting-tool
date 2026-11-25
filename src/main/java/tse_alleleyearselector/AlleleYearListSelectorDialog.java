@@ -1,4 +1,4 @@
-package tse_areaselector;
+package tse_alleleyearselector;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -28,20 +28,20 @@ import config.ProxyConfig;
 import global_utils.Message;
 import global_utils.Warnings;
 import i18n_messages.TSEMessages;
-import tse_areaselector.AreaSelectorEnum;
+import tse_alleleyearselector.AlleleYearSelectorEnum;
 import user_interface.Actions;
 import user_interface.ProxySettingsDialog;
 
-public class AreaListSelectorDialog extends Dialog {
+public class AlleleYearListSelectorDialog extends Dialog {
 
 	public Shell shell;
 	
-	public AreaListSelectorDialog(Shell parent, int style) {
+	public AlleleYearListSelectorDialog(Shell parent, int style) {
 		super(parent, style);
 		shell = parent;
 	}
 
-	private static final Logger LOGGER = LogManager.getLogger(AreaListSelectorDialog.class);
+	private static final Logger LOGGER = LogManager.getLogger(AlleleYearListSelectorDialog.class);
 	
 	/**
 	 * Open the dialog
@@ -58,11 +58,11 @@ public class AreaListSelectorDialog extends Dialog {
 		
 		shell.setLayout(new GridLayout(2, false));
 		
-		Label areaListLabel = new Label(shell, SWT.NONE);
-		areaListLabel.setText("Area List:");
+		Label alleleYearListLabel = new Label(shell, SWT.NONE);
+		alleleYearListLabel.setText("Allele year selector:");
 		
-		ComboViewer areaListSelector = new ComboViewer(shell);
-		areaListSelector.setContentProvider(new IStructuredContentProvider() {
+		ComboViewer alleleYearListSelector = new ComboViewer(shell);
+		alleleYearListSelector.setContentProvider(new IStructuredContentProvider() {
 
 			@Override
 			public void dispose() {}
@@ -72,33 +72,33 @@ public class AreaListSelectorDialog extends Dialog {
 
 			@Override
 			public Object[] getElements(Object arg0) {
-				return (AreaSelectorEnum[]) arg0;
+				return (AlleleYearSelectorEnum[]) arg0;
 			}
 		});
 		
-		areaListSelector.setLabelProvider(new LabelProvider() {
+		alleleYearListSelector.setLabelProvider(new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((AreaSelectorEnum) element).getLabel();
+				return ((AlleleYearSelectorEnum) element).getLabel();
 			}
 		});
 		
-		areaListSelector.setInput(AreaSelectorEnum.values());
+		alleleYearListSelector.setInput(AlleleYearSelectorEnum.values());
 		
 		Button saveBtn = new Button(shell, SWT.NONE);
 		saveBtn.setText("Save");
 		
-		areaListSelector.getCombo().addSelectionListener(new SelectionAdapter() {
+		alleleYearListSelector.getCombo().addSelectionListener(new SelectionAdapter() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				
-				if(areaListSelector.getSelection().isEmpty())
+				if(alleleYearListSelector.getSelection().isEmpty())
 					return;
 				
-				AreaSelectorEnum mode = (AreaSelectorEnum) ((IStructuredSelection) areaListSelector.getSelection()).getFirstElement();
+				AlleleYearSelectorEnum mode = (AlleleYearSelectorEnum) ((IStructuredSelection) alleleYearListSelector.getSelection()).getFirstElement();
 				
-				boolean manualMode = mode == AreaSelectorEnum.NEW_SELECTOR;
+				boolean manualMode = mode == AlleleYearSelectorEnum.NEW_SELECTOR;
 				
 				
 			}
@@ -110,12 +110,12 @@ public class AreaListSelectorDialog extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				
-				AreaSelectorEnum mode = (AreaSelectorEnum) ((IStructuredSelection) areaListSelector.getSelection()).getFirstElement();
+				AlleleYearSelectorEnum mode = (AlleleYearSelectorEnum) ((IStructuredSelection) alleleYearListSelector.getSelection()).getFirstElement();
 				
 				try {
-					AreaSelectorConfig config = new AreaSelectorConfig();
+					AlleleYearSelectorConfig config = new AlleleYearSelectorConfig();
 					config.setAreaSelectorIndex(mode.getIndex());
-					Message m = Warnings.create("Info", TSEMessages.get("arealist.dialog.inforestart"));
+					Message m = Warnings.create("Info", TSEMessages.get("allelelist.dialog.inforestart"));
 					m.open(shell);
 				} catch (IOException e) {
 					LOGGER.error("There is an error upon saving the configuration ", e);
@@ -127,11 +127,11 @@ public class AreaListSelectorDialog extends Dialog {
 			}
 		});
 		
-		shell.setText(TSEMessages.get("arealist.config.item"));
+		shell.setText(TSEMessages.get("allelelist.config.item"));
 		
-		AreaSelectorConfig config = new AreaSelectorConfig();
+		AlleleYearSelectorConfig config = new AlleleYearSelectorConfig();
 		
-		areaListSelector.setSelection(new StructuredSelection(AreaSelectorEnum.fromInt(config.getAreaSelectorIndexInt())));
+		alleleYearListSelector.setSelection(new StructuredSelection(AlleleYearSelectorEnum.fromInt(config.getAreaSelectorIndexInt())));
 	}
 	
 //	public static void save(AreaSelectorEnum enumSelected) throws IOException {
@@ -141,7 +141,7 @@ public class AreaListSelectorDialog extends Dialog {
 	public static void main(String[] args) throws IOException {
 		Display display = new Display();
 		Shell shell = new Shell(display);
-		AreaListSelectorDialog dialog = new AreaListSelectorDialog(shell, SWT.SHELL_TRIM | SWT.APPLICATION_MODAL);
+		AlleleYearListSelectorDialog dialog = new AlleleYearListSelectorDialog(shell, SWT.SHELL_TRIM | SWT.APPLICATION_MODAL);
 		dialog.open();
 		
 		while(!shell.isDisposed()) {

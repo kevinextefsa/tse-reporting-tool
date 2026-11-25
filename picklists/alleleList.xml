@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <alleleList>
 	<selectionList id="F01.A057G">
-		<selection code="AXRR">
-			<description>AXRR</description>
+		<selection code="AZRR">
+			<description>AZRR</description>
 		</selection>
 		<selection code="ALRR">
 			<description>ALRR</description>
@@ -10,8 +10,8 @@
 		<selection code="AFRR">
 			<description>AFRR</description>
 		</selection>
-		<selection code="AXRQ">
-			<description>AXRQ</description>
+		<selection code="AZRQ">
+			<description>AZRQ</description>
 		</selection>
 		<selection code="AFRQ">
 			<description>AFRQ</description>
@@ -19,8 +19,8 @@
 		<selection code="ALRQ">
 			<description>ALRQ</description>
 		</selection>
-		<selection code="AXRH">
-			<description>AXRH</description>
+		<selection code="AZRH">
+			<description>AZRH</description>
 		</selection>
 		<selection code="AFRH">
 			<description>AFRH</description>
@@ -28,8 +28,8 @@
 		<selection code="ALRH">
 			<description>ALRH</description>
 		</selection>
-		<selection code="AXHQ">
-			<description>AXHQ</description>
+		<selection code="AZHQ">
+			<description>AZHQ</description>
 		</selection>
 		<selection code="AFHQ">
 			<description>AFHQ</description>
@@ -37,8 +37,8 @@
 		<selection code="ALHQ">
 			<description>ALHQ</description>
 		</selection>
-		<selection code="VXRQ">
-			<description>VXRQ</description>
+		<selection code="VZRQ">
+			<description>VZRQ</description>
 		</selection>
 		<selection code="VLRQ">
 			<description>VLRQ</description>
